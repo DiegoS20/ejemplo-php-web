@@ -10,29 +10,33 @@
 </head>
 
 <body>
-
     <div class="container mt-5">
         <h2>Registro de Datos</h2>
-        <form>
+        <form action="controllers/agregar.php" method="post">
             <div class="form-group">
-                <label for="pais">País</label>
-                <input type="text" class="form-control" id="pais" placeholder="Ingrese el país">
+                <label for="nombre">País</label>
+                <input required autocomplete="off" type="text" class="form-control" id="nombre" name="nombre"
+                    placeholder="Ingrese el país">
             </div>
             <div class="form-group">
                 <label for="capital">Capital</label>
-                <input type="text" class="form-control" id="capital" placeholder="Ingrese la capital">
+                <input required autocomplete="off" type="text" class="form-control" id="capital" name="capital"
+                    placeholder="Ingrese la capital">
             </div>
             <div class="form-group">
                 <label for="moneda">Moneda</label>
-                <input type="text" class="form-control" id="moneda" placeholder="Ingrese la moneda">
+                <input required autocomplete="off" type="text" class="form-control" id="moneda" name="moneda"
+                    placeholder="Ingrese la moneda">
             </div>
             <div class="form-group">
                 <label for="ave">Ave Nacional</label>
-                <input type="text" class="form-control" id="ave" placeholder="Ingrese el ave nacional">
+                <input required autocomplete="off" type="text" class="form-control" id="ave" name="ave"
+                    placeholder="Ingrese el ave nacional">
             </div>
             <div class="form-group">
                 <label for="arbol">Árbol Nacional</label>
-                <input type="text" class="form-control" id="arbol" placeholder="Ingrese el árbol nacional">
+                <input required autocomplete="off" type="text" class="form-control" id="arbol" name="arbol"
+                    placeholder="Ingrese el árbol nacional">
             </div>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>

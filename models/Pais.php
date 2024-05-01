@@ -31,4 +31,13 @@ class Pais
         $stmt->fetchAll();
         $stmt->closeCursor();
     }
+
+    public static function add(string $nombre, string $capital, string $moneda, string $ave, string $arbol)
+    {
+        $con = Conexion::getInstance();
+        $stmt = $con->prepare('INSERT INTO paises (nombre, capital, moneda, ave, arbol) VALUES (?,?,?,?,?)');
+        $stmt->execute([$nombre, $capital, $moneda, $ave, $arbol]);
+        $stmt->fetchAll();
+        $stmt->closeCursor();
+    }
 }

@@ -29,7 +29,7 @@ $paises = is_null($query) ? Pais::all() : Pais::findByName($query);
             </div>
         </form>
 
-        <a class="btn btn-success mb-3">Agregar país</a>
+        <a href="registro" class="btn btn-success mb-3">Agregar país</a>
 
         <!-- Tabla -->
         <table class="table">
