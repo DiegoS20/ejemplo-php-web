@@ -23,6 +23,16 @@ class Pais
         return $paises;
     }
 
+    public static function findId(int|string $id)
+    {
+        $con = Conexion::getInstance();
+        $stmt = $con->prepare('SELECT * FROM paises WHERE id_pais = ?');
+        $stmt->execute([$id]);
+        $paises = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $paises[0];
+    }
+
     public static function delete(int $id)
     {
         $con = Conexion::getInstance();
@@ -37,6 +47,15 @@ class Pais
         $con = Conexion::getInstance();
         $stmt = $con->prepare('INSERT INTO paises (nombre, capital, moneda, ave, arbol) VALUES (?,?,?,?,?)');
         $stmt->execute([$nombre, $capital, $moneda, $ave, $arbol]);
+        $stmt->fetchAll();
+        $stmt->closeCursor();
+    }
+
+    public static function actualizar(int $id, string $nombre, string $capital, string $moneda, string $ave, string $arbol)
+    {
+        $con = Conexion::getInstance();
+        $stmt = $con->prepare('UPDATE paises SET nombre = ?, capital = ?, moneda = ?, ave = ?, arbol = ? WHERE id_pais = ?');
+        $stmt->execute([$nombre, $capital, $moneda, $ave, $arbol, $id]);
         $stmt->fetchAll();
         $stmt->closeCursor();
     }

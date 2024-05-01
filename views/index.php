@@ -55,7 +55,7 @@ $paises = is_null($query) ? Pais::all() : Pais::findByName($query);
                             <!-- Botones de eliminar y editar -->
                             <a class="btn btn-danger btn-sm"
                                 href="controllers/delete.php?id=<?= $pais['id_pais'] ?>">Eliminar</a>
-                            <a class="btn btn-primary btn-sm">Editar</a>
+                            <a class="btn btn-primary btn-sm" href="actualizar?id=<?= $pais['id_pais'] ?>">Editar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
