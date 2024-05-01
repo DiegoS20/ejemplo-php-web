@@ -1,3 +1,11 @@
+<?php
+require_once ('../models/Pais.php');
+
+$query = @$_GET["query"];
+$paises = is_null($query) ? Pais::all() : Pais::findByName($query);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +20,14 @@
 <body>
     <div class="container mt-5">
         <!-- Input de búsqueda y botón -->
-        <div class="row mb-3">
+        <form action="" method="get" class="row mb-3">
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Buscar">
+                <input type="text" class="form-control" placeholder="Buscar por nombre de país" name="query" id="query">
             </div>
             <div class="col-md-2">
                 <button class="btn btn-primary">Buscar</button>
             </div>
-        </div>
+        </form>
 
         <a class="btn btn-success mb-3">Agregar país</a>
 
@@ -36,32 +44,21 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Aquí puedes agregar filas dinámicamente con datos -->
-                <tr>
-                    <td>Argentina</td>
-                    <td>Buenos Aires</td>
-                    <td>Peso argentino</td>
-                    <td>Hornero</td>
-                    <td>Árbol de Ceibo</td>
-                    <td>
-                        <!-- Botones de eliminar y editar -->
-                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                        <button class="btn btn-primary btn-sm">Editar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Brasil</td>
-                    <td>Brasilia</td>
-                    <td>Real brasileño</td>
-                    <td>Sabía-laranjeira</td>
-                    <td>Pau-brasil</td>
-                    <td>
-                        <!-- Botones de eliminar y editar -->
-                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                        <button class="btn btn-primary btn-sm">Editar</button>
-                    </td>
-                </tr>
-                <!-- Agregar más filas según sea necesario -->
+                <?php foreach ($paises as $pais): ?>
+                    <tr>
+                        <td><?= $pais['nombre'] ?></td>
+                        <td><?= $pais['capital'] ?></td>
+                        <td><?= $pais['moneda'] ?></td>
+                        <td><?= $pais['ave'] ?></td>
+                        <td><?= $pais['arbol'] ?></td>
+                        <td>
+                            <!-- Botones de eliminar y editar -->
+                            <a class="btn btn-danger btn-sm"
+                                href="controllers/delete.php?id=<?= $pais['id_pais'] ?>">Eliminar</a>
+                            <a class="btn btn-primary btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
