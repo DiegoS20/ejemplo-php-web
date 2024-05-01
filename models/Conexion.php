@@ -1,24 +1,24 @@
 <?php
 class Conexion
 {
-    private static $instance = null;
-    private function Conexion()
+    private static $instance;
+    private function __construct()
     {
-        try {
-            return new PDO('pgsql:host=localhost;port=5432;dbname=paises;', 'postgres', 'admin', [
-                PDO::ATTR_EMULATE_PREPARES => true,
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
-            ]);
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage() . " en la línea: " . $e->getLine();
-        }
     }
 
-    public static function getInstance(): Conexion
+    public static function getInstance(): PDO
     {
-        if (is_null(self::$instance)) {
-            self::$instance = new Conexion();
+        if (empty(self::$instance)) {
+            try {
+                self::$instance = new PDO('mysql:host=localhost;dbname=ejemplo-web', 'root', '', [
+                    PDO::ATTR_EMULATE_PREPARES => true,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
+                ]);
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage() . " en la línea: " . $e->getLine();
+            }
         }
 
         return self::$instance;
